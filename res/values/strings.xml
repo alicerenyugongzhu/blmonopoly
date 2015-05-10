@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">blmonopoly</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="confirm">OK</string>
+    <!-- Launch Page -->
+    <string name="start_game">START</string>
+    
+    <!-- Game page -->
+    <string name="level">Level is</string>
+    
+    <!-- make friend -->
+    <string name="make_friend_title">Make Friend</string>
+    <string name="jouralist_baimugui">You are assigned to interview a killer who killed his father. You thought he is a perverted guy.
+       But things turns out not quite the same as you think about. He is slient and honest. You are interested in him, and want to know
+       what happened to him. So you keep in touch with him personally. </string>
+    <string name="journalist_gaoyu">As a new journalist, you are introduced to one of the colleage. He is full of power on everything.
+        You are talking happily with each other. You know that you can learn a lot from him. Just follow him, you will be able to 
+        became a super journalist. </string>
+    <string name="jouralist_majian">You are assigned to follow a drug case. In the dedicated place, you only see one guy stand there.
+        The time passed, but no one else coming. You thought that maybe the intelligence is not correct. You come to talk the only 
+        guy you see. He is very dignified. He thought you are a callboy. Ask your name, phone number and leave. </string>
+    <string name="journalist_quanshui">You are assigned to interview a new pop star. He just annource to become a actor last week.
+        He is so cute and quite like a girl. Most time, he still not able to answer the question well. But that is also attact you.
+        Personally you also ask to get in touch with each other. </string>
+    <string name="journalist_xitiao">You are assigned to interview the pop star who just win the second place for a charts. During the 
+        interview you know that he has win the first place for 5 years before. Now he is so sad about the result. You give him some 
+        encourage and comfort. And you invite him to have a drink together after the interview. </string>
+    <string name="doctor_chenggu">He is coming to purpuit curing the neat freak. He wears the glove all the time. And do not touch 
+        anything in the room. You are willing to be the physician in charge. You want to cure him very well. </string>
+    <string name="doctor_heilai">In a doctor summit. You see someone who is much more slient than others. He did not say anything in
+         the summit, and also not show any expression. You are curious what he is thinking about. So you went to talk with him. To your
+         surprise, he talk to you much. And you leave the phone number and keep in touch. </string>
+    <string name="doctor_gaochuan">A new graduated doctor join into your hospital. He is so charming and every nerse want to talk to 
+        him. He is assigned to follow with you. So you get more chance to come together with him. You find it is a good thing, because 
+        girls are followed you too because he is around you. </string>
+    <string name="doctor_xiaoniaoyou">After you graudated from the university. You have long time not see the guy who are in the same 
+        community with you during the university. It is happened that you see each other in the street, and went to drink together because 
+        he is sad that day. You know that something happened to him. But you are not able to let him talk you the truth now. But you tell
+         him to call you whenever he want someone to drink together. </string>
+    <string name="doctor_shidai">He has the gunshot wounds. The men he owns are very nerious to ask for my help. You have the operation for 
+        him. And he has no risk now. You know he is hooligan. But it looks he is handsome and tender. You want to know more, so talk to him. 
+        And we know each other. </string>
+    <string name="bar_shenwei">You are searching for a new bartender, and he comes. The excellent skill and handsome face attract you 
+        immediately. You hire him and he begins to work in your bar.</string>
+    <string name="bar_gaochuan">One night, two girls are contested a him. He is so optional. But no obvious like or not like. That attitude 
+        make you feel a little angry and a little interested. So you went to talk to him. And then you two become friends. </string>
+    <string name="bar_xitiao">One day, a group of guys are drinking in your bar. He is so outstanding from them due to the beautiful face 
+        and special ethos. He drunk and keep talking something. Looks very funny. You keep him in the bar until he is sober up.</string>
+    <string name="bar_shouye">You are searching for someone to play the paino in your bar. He comes. He plays very well. And also he is 
+        able to help much more than playing paino. He know the account, the also can help on serving. You are quite happy that he can 
+        work in your bar. </string>
+    <string name="bar_hezhi">He always drinks in your bar. He looks so cool. You sometimes to talk with him. You know that he owns a
+         company, no girlfriends. But plenty of lovers. He never show his real heart. You do not like his character. But it is interesting 
+         you two become friends. </string>
+    <string name="editor_gaoye">He is a legendary figure in the editor region. He is so powerful to save a almost dead publisher. 
+        You finally got a chance to talk with in a editor party. You successfully got this cell phone number. You will keep in touch. </string>
+    <string name="editor_xiaoyesi">A new editor is assigned to your team. He is the son of another publisher owner. I have no idea why such a 
+        heir need to come to your publisher. Anyway you find him working hard in a short time. You get along with him very well. Though he 
+        does not express himself most of the time. But you think he is a good guy. </string>     
+    <string name="editor_gaoyu">He takes the latest interview to you. You are the editor for him. You have seen several interview 
+        from him. But this is the first time that you see him. He is full of power to the job. You are working get along with each other very well. </string>
+    <string name="editor_lianjian"></string>
+    <string name="editor_qiancun"></string>
+    <string name="hooligan_majian"></string>
+    <string name="hooligan_shidai"></string>
+    <string name="hooligan_baimugui"></string>
+    <string name="hooligan_longcheng"> </string>
+    <string name="hooligan_shenwei"></string>
+    <string name="lawyer_youchuan"> </string>
+    <string name="lawyer_xiaoniaoyou"> </string>
+    <string name="lawyer_baimugui"></string>
+    <string name="lawyer_longcheng"></string>
+    <string name="lawyer_hezhi"></string>
+    <string name="manager_gaoye"></string>
+    <string name="manager_hezhi"></string>
+    <string name="manager_jiushi"></string>
+    <string name="manager_guimu"> </string>
+    <string name="manager_xiangle"> </string>
+    <string name="noble_guimu"></string>
+    <string name="noble_jiushi"> </string>
+    <string name="noble_qiancun"> </string>
+    <string name="noble_majian"></string>
+    <string name="noble_shenwei"></string>
+    <string name="police_baimugui"> </string>
+    <string name="police_majian"></string>
+    <string name="police_shidai"></string>
+    <string name="police_longcheng"></string>
+    <string name="police_shenwei"></string>   
+    <string name="secretary_chenggu"></string>
+    <string name="secretary_hezhi"></string>
+    <string name="secretary_gaoye"></string>
+    <string name="secretary_shouye"></string>
+    <string name="secretary_xiangle"></string>
+    <string name="star_shenghu"></string>
+    <string name="star_quanshui"></string>
+    <string name="star_xitiao"></string>
+    <string name="star_yitiao"></string>
+    <string name="star_gaoyu"></string>
+    <string name="student_gaoyuan"></string>
+    <string name="student_yuqi"></string>
+    <string name="student_gaochuan"></string>
+    <string name="student_xiaoniaoyou"></string>
+    <string name="student_zhongsi"></string>
+    <string name="teacher_gaoyuan"></string>
+    <string name="teacher_yuqi"></string>
+    <string name="teacher_lianjian"></string>
+    <string name="teacher_qiancun"></string>
+    <string name="teacher_zhongsi"></string>
+    <string name="staff_heilai"></string>
+    <string name="staff_shouye"></string>
+    <string name="staff_longcheng"></string>
+    <string name="staff_xiaoyesi"></string>
+    <string name="staff_zhongsi"></string>
+    <string name="writer_xiaoyesi"></string>
+    <string name="writer_gaoye"></string>
+    <string name="writer_shenghu"></string>
+    <string name="writer_quanshui"></string>
+    <string name="writer_yitiao"></string>
+    <string name="you_know">You know </string>
+    
+    <!-- Change career -->
+    <string name="change_career1">You decide to change your career from </string>
+    <string name="change_career2"> to </string>
+    <string name="change_career_title">Change Career</string>
+    
+    <!-- Move Forward -->
+    <string name="move_forward1">You hit move forward. You move forward</string>
+    <string name="move_forward2">steps more.</string>
+    <string name="move_forward_title">Move Forward</string>
+</resources>
