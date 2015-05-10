@@ -28,12 +28,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +73,9 @@ public class GameActivity extends Activity{
 	MapCell[] mapCell;
 	MapCell startMapCell;
 	MapCell endMapCell;
+	
+	//popup Window for move event
+	PopupWindow movepop;
 	
 	//Game stage
 	boolean gameEnd = false;
@@ -544,7 +552,7 @@ public class GameActivity extends Activity{
 			    Integer diceValue = random.nextInt(6)+1;
 			    popMovingForward(diceValue);
 			    gameEnd = updatePosition(diceValue);
-
+			    CompareEvent();
 			}
 			j++;
 		}
@@ -561,23 +569,29 @@ public class GameActivity extends Activity{
 	private void popMovingForward(int diceValue) {
 		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
 		final View textEntryView = factory.inflate(R.layout.move_popup, null);
-		ImageView image = (ImageView)textEntryView.findViewById(R.id.friendPhoto);
-		image.setImageResource(gameInfo.getPlayerPhoto());
-		TextView textView = (TextView)textEntryView.findViewById(R.id.friendStory); 
+		TextView textView = (TextView)textEntryView.findViewById(R.id.moveEvent); 
 		String text = getString(R.string.move_forward1) + " " + diceValue + " " + getString(R.string.move_forward2);
 		textView.setText(text);
-		AlertDialog dlg = new AlertDialog.Builder(GameActivity.this)
-		.setTitle(R.string.move_forward_title)
-		.setView(textEntryView)
-		.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+		
+		int popWidth = 300;
+		int popHeight = 200;
+
+		movepop = new PopupWindow(textEntryView, popWidth, popHeight, true);
+
+		movepop.setBackgroundDrawable(getResources().getDrawable(R.drawable.qmove));
+		movepop.setFocusable(true);
+		movepop.setOutsideTouchable(false);
+		movepop.setTouchable(true);
+		movepop.showAtLocation(textEntryView, Gravity.CENTER, 0, 0);
+		Button button = (Button)textEntryView.findViewById(R.id.moveConfirm);
+		button.setOnClickListener(new OnClickListener(){
+
 			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				arg0.cancel();
-			    //CompareEvent();
+			public void onClick(View arg0) {
+				movepop.dismiss();
 			}
-		})
-		.create();
-		dlg.show();
+			
+		});
 	}
 
 	private void popChangeCareerStory(String oldCareer, Career career) {
