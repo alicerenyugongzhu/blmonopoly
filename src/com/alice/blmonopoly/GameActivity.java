@@ -33,12 +33,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -505,7 +507,7 @@ public class GameActivity extends Activity{
     			if((playerX - cubeWidth*step) >= 0){
     				playerX = playerX - cubeWidth*step;
     			} else {
-    				playerX = cubeWidth*step - playerX;
+    				playerX = cubeWidth*(step-1) - playerX;
     				playerY = playerY - cubeHeight;
     				
     			}
@@ -553,7 +555,9 @@ public class GameActivity extends Activity{
 		for(i = 0; i<gameInfo.getDateNumber() && find != true; i++){
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
-				ShowMsg("Hit Date");
+				//ShowMsg("Hit Date");
+		//		GameInfo.gameCharacter dateGuy = gameInfo.getAKnownGuy();
+			//	popDate(dateGuy);
 			}
 			j++;
 		}
@@ -599,6 +603,11 @@ public class GameActivity extends Activity{
 	}
 
 
+	private void popDate(gameCharacter dateGuy) {
+//		gameInfo.setRelationValue(dateGuy);
+		
+	}
+
 	private void popMoving(int diceValue, boolean back) {
 		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
 		final View textEntryView = factory.inflate(R.layout.move_popup, null);
@@ -621,15 +630,16 @@ public class GameActivity extends Activity{
 		movepop.setOutsideTouchable(false);
 		movepop.setTouchable(true);
 		movepop.showAtLocation(textEntryView, Gravity.CENTER, 0, 0);
-		Button button = (Button)textEntryView.findViewById(R.id.moveConfirm);
-		button.setOnClickListener(new OnClickListener(){
+		movepop.setTouchInterceptor(new OnTouchListener(){
 
 			@Override
-			public void onClick(View arg0) {
+			public boolean onTouch(View arg0, MotionEvent arg1) {
 				movepop.dismiss();
+				return true;
 			}
 			
 		});
+
 	}
 
 	private void popChangeCareerStory(String oldCareer, Career career) {
