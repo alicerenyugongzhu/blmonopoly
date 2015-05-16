@@ -99,6 +99,9 @@ public class GameActivity extends Activity{
 			1, //end
 			};
 	
+	boolean FORWARD = false;
+	boolean BACK    = true;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -416,7 +419,7 @@ public class GameActivity extends Activity{
 						event.getY() > showPlayerInfo.getRightBottom().getY()){
 					random = new Random();
 				    Integer diceValue = random.nextInt(6)+1;
-				    gameEnd = updatePosition(diceValue);
+				    gameEnd = updatePosition(diceValue, FORWARD);
 				    
 				} else {
 					withinPlayerInfo = true;
@@ -454,9 +457,10 @@ public class GameActivity extends Activity{
 		
 	}
 	
-	private boolean updatePosition(int step) {
+	private boolean updatePosition(int step, boolean back) {
         boolean end = false;
         //Log.d("alice", "step is " + step);
+      if(!back) {
 			
 		if((CUBE_NUMBER_Y%2) == 1){
 			if(((playerX + cubeWidth*step) >= (screenWidth-cubeWidth)) && (playerY + cubeHeight) == screenHeight) {
@@ -492,6 +496,29 @@ public class GameActivity extends Activity{
 				playerY = playerY + cubeHeight;
 			}
 		}
+      } else {
+    	if(((playerX - cubeWidth*step) <= 0) &&  (playerY == 0)){
+				playerX = 0;
+				playerY = 0;
+    	} else {
+    		if((playerY/cubeHeight)%2 == 0){
+    			if((playerX - cubeWidth*step) >= 0){
+    				playerX = playerX - cubeWidth*step;
+    			} else {
+    				playerX = cubeWidth*step - playerX;
+    				playerY = playerY - cubeHeight;
+    				
+    			}
+    		} else {
+    			if((playerX + cubeWidth*step) < screenWidth){
+    				playerX = playerX + cubeWidth*step;
+    			} else {
+    				playerX = 2*screenWidth - cubeWidth*(step+1) - playerX;
+    				playerY = playerY-cubeHeight;
+    			}
+    		}
+    	}
+      }
 		return end;
 		
 	}
@@ -540,7 +567,13 @@ public class GameActivity extends Activity{
 		for(i = 0; i<gameInfo.getMoveBackNumber() && find != true; i++){
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
-				ShowMsg("Hit Move back");
+				//ShowMsg("Hit Move back");
+				random = new Random();
+				Integer diceValue = random.nextInt(6)+1;
+				popMoving(diceValue, BACK);
+				gameEnd = updatePosition(diceValue, BACK);//Need move back
+				CompareEvent();
+				
 			}
 			j++;
 		}
@@ -550,8 +583,8 @@ public class GameActivity extends Activity{
 				//ShowMsg("Hit Move Fowrad");
 				random = new Random();
 			    Integer diceValue = random.nextInt(6)+1;
-			    popMovingForward(diceValue);
-			    gameEnd = updatePosition(diceValue);
+			    popMoving(diceValue, FORWARD);
+			    gameEnd = updatePosition(diceValue, FORWARD);
 			    CompareEvent();
 			}
 			j++;
@@ -566,11 +599,16 @@ public class GameActivity extends Activity{
 	}
 
 
-	private void popMovingForward(int diceValue) {
+	private void popMoving(int diceValue, boolean back) {
 		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
 		final View textEntryView = factory.inflate(R.layout.move_popup, null);
-		TextView textView = (TextView)textEntryView.findViewById(R.id.moveEvent); 
-		String text = getString(R.string.move_forward1) + " " + diceValue + " " + getString(R.string.move_forward2);
+		TextView textView = (TextView)textEntryView.findViewById(R.id.moveEvent);
+		String text;
+		if(!back){
+		    text = getString(R.string.move_forward1) + " " + diceValue + " " + getString(R.string.move_forward2);
+		} else {
+			text = getString(R.string.move_back1) + " " + diceValue + " " + getString(R.string.move_forward2);
+		}
 		textView.setText(text);
 		
 		int popWidth = 300;

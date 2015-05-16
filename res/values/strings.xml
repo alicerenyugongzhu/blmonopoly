@@ -128,6 +128,10 @@
     
     <!-- Move Forward -->
     <string name="move_forward1">You hit move forward. You move forward</string>
-    <string name="move_forward2">steps more.</string>
+    <string name="move_forward2">steps.</string>
     <string name="move_forward_title">Move Forward</string>
+    
+    <!-- Move Back -->
+    <string name="move_back1">You hit move back. You move back</string>
+    <string name="move_back_title">Move Back</string>
 </resources>
