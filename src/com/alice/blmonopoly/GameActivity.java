@@ -1,10 +1,10 @@
 package com.alice.blmonopoly;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.alice.blmonopoly.util.GameInfo;
 import com.alice.blmonopoly.util.GameInfo.Career;
+import com.alice.blmonopoly.util.GameInfo.LuckyDraw;
 import com.alice.blmonopoly.util.GameInfo.StoryFriend;
 import com.alice.blmonopoly.util.GameInfo.gameCharacter;
 import com.alice.blmonopoly.util.GameInfo.gameEvent;
@@ -15,14 +15,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -32,15 +30,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,6 +97,7 @@ public class GameActivity extends Activity{
 	
 	boolean FORWARD = false;
 	boolean BACK    = true;
+	int INC_FAVOR   = 2;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -133,6 +128,19 @@ public class GameActivity extends Activity{
 		gameInfo.setMapEventNumber(defaultEventNumber);
 		
 		//Map Event initization
+		InitMap();
+		
+		
+		//Init position
+		playerX = startMapCell.getX(); //Start position
+		playerY = startMapCell.getY(); //Start position	
+		
+		//Init info position
+		showPlayerInfo = new PlayerInfo();
+		//Log.d("alice", "get x is " +showPlayerInfo.getLeftTop().getX());
+	}
+	
+	private void InitMap() {
 		startMapCell = new MapCell(0, 0, gameEvent.START);
 		endMapCell = new MapCell(((CUBE_NUMBER_Y%2)>0 ? CUBE_NUMBER_X-1 : 0), CUBE_NUMBER_Y-1, gameEvent.END);
 		int eventAmount = gameInfo.getMakeFriendNumber() +
@@ -166,22 +174,14 @@ public class GameActivity extends Activity{
 		for(i = 0; i<gameInfo.getTaskNumber(); i++){
 			mapCell[j++].setEvent(gameEvent.TASK);
 		}
-		
-		//Init position
-		playerX = startMapCell.getX(); //Start position
-		playerY = startMapCell.getY(); //Start position	
-		
-		//Init info position
-		showPlayerInfo = new PlayerInfo();
-		//Log.d("alice", "get x is " +showPlayerInfo.getLeftTop().getX());
 	}
-	
+
 	public MapCell[] getRandArray(int range[], int amount){
 		Random rand = new Random();
 		MapCell[] randArray = new MapCell[amount];
 		boolean[][] dupCheck = new boolean[range[0]][range[1]];
 		dupCheck[0][0] = true;
-		dupCheck[range[0]-1][range[1]-1] = true;
+		dupCheck[0][range[1]-1] = true;   //TODO here is a hack for the end cell check
 		for(int i = 0; i < amount; i++){
 			randArray[i] = new MapCell();
 			int randXValue= 0;
@@ -532,12 +532,14 @@ public class GameActivity extends Activity{
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
 				gameCharacter newKnown = gameInfo.appendKnownList();
-				//ShowMsg("Hit Make Friends");
-				/*ArrayList<gameCharacter> friends = gameInfo.getKnownList();
-				for(int k=0; k<friends.size(); k++){
-					ShowMsg("You know " + friends.get(k).getName());
-				}*/
-				popSingleStory(gameInfo.getPlayerCareer(), newKnown);
+				if(newKnown != null) {
+					Log.d("alice", "the default favor level is " + StoryFriend.getFavorLevel(gameInfo.getPlayerCareer(), 
+							newKnown));
+				    newKnown.setFavor(StoryFriend.getFavorLevel(gameInfo.getPlayerCareer(), newKnown));
+				    popSingleStory(gameInfo.getPlayerCareer(), newKnown);
+				} else {
+				    ShowMsg("You didn't get new friends today!!");
+				}
 
 			}
 			j++;
@@ -545,7 +547,6 @@ public class GameActivity extends Activity{
 		for(i = 0;i<gameInfo.getChangeCareerNumber() && find != true; i++){
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
-				//ShowMsg("Hit Change Career");
 				String oldCareer = gameInfo.getPlayerCareer().getCareerName();
 				gameInfo.changeCareer();
 				popChangeCareerStory(oldCareer, gameInfo.getPlayerCareer());
@@ -556,15 +557,35 @@ public class GameActivity extends Activity{
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
 				//ShowMsg("Hit Date");
-		//		GameInfo.gameCharacter dateGuy = gameInfo.getAKnownGuy();
-			//	popDate(dateGuy);
+				GameInfo.gameCharacter dateGuy = gameInfo.getAKnownGuy();
+				if(dateGuy != null) {
+				  dateGuy.setFavor(dateGuy.getFavor() + INC_FAVOR);
+				  popDate(dateGuy);
+				} else {
+					ShowMsg("You know nobody by now. So you can't date.");
+				}
 			}
 			j++;
 		}
 		for(i = 0; i<gameInfo.getLuckyDrawNumber() && find != true; i++){
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
-				ShowMsg("Hit the Lucky Draw");
+				//ShowMsg("Hit the Lucky Draw");
+				
+				GameInfo.gameCharacter luckyGuy = gameInfo.getAKnownGuy();
+				if(luckyGuy != null) {
+					random = new Random();
+				    int luckyNum = random.nextInt(LuckyDraw.values().length);
+				    luckyGuy.setFavor(luckyGuy.getFavor() + 
+						  LuckyDraw.getFavorLevel(luckyNum));
+				  
+				    gameInfo.setPlayerGValue(gameInfo.getPlayerGValue() + 
+							LuckyDraw.getGLevel(luckyNum));
+				  popLuckyDraw(getString(LuckyDraw.getEvent(luckyNum)), LuckyDraw.getGLevel(luckyNum), luckyGuy);   //Try to use process Dialog
+				} else {
+					ShowMsg("You know nobody by now. So you can't use lucky Draw.");
+				}
+				
 			}
 			j++;
 		}
@@ -603,8 +624,55 @@ public class GameActivity extends Activity{
 	}
 
 
+	private void popLuckyDraw(String event, int G, gameCharacter luckyGuy) {
+		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
+		final View textEntryView = factory.inflate(R.layout.make_frident_dialog, null);
+		ImageView image = (ImageView)textEntryView.findViewById(R.id.friendPhoto);
+		image.setImageResource(luckyGuy.getPicture());
+		TextView textView = (TextView)textEntryView.findViewById(R.id.friendStory); 
+		//Log.d("alice", "new career is " + career.getCareerName());
+		String text;
+		if(G > 0){
+		  text = event + " " + luckyGuy.getName() ;
+		} else {
+		  text = luckyGuy.getName() + " " + event;	
+		}
+		textView.setText(text);
+		AlertDialog dlg = new AlertDialog.Builder(GameActivity.this)
+		.setTitle(R.string.luckyDraw_title)
+		.setView(textEntryView)
+		.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				arg0.cancel();
+			}
+		})
+		.create();
+		dlg.show();		
+	}
+
 	private void popDate(gameCharacter dateGuy) {
-//		gameInfo.setRelationValue(dateGuy);
+		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
+		final View textEntryView = factory.inflate(R.layout.make_frident_dialog, null);
+		ImageView image = (ImageView)textEntryView.findViewById(R.id.friendPhoto);
+		image.setImageResource(dateGuy.getPicture());
+		TextView textView = (TextView)textEntryView.findViewById(R.id.friendStory); 
+		//Log.d("alice", "new career is " + career.getCareerName());
+		String text = getString(R.string.date1) + " " + dateGuy.getName() + 
+				getString(R.string.date2) + " " + INC_FAVOR + getString(R.string.date3) + 
+				" " + dateGuy.getFavor();
+		textView.setText(text);
+		AlertDialog dlg = new AlertDialog.Builder(GameActivity.this)
+		.setTitle(R.string.date_title)
+		.setView(textEntryView)
+		.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				arg0.cancel();
+			}
+		})
+		.create();
+		dlg.show();
 		
 	}
 

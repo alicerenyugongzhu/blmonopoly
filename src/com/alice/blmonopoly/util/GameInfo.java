@@ -3,12 +3,8 @@ package com.alice.blmonopoly.util;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Random;
-
 import android.util.Log;
-
 import com.alice.blmonopoly.R;
-import com.alice.blmonopoly.util.GameInfo.Career;
-import com.alice.blmonopoly.util.GameInfo.gameCharacter;
 
 //Think about whether I need to use the Abstract Class
 public class GameInfo {
@@ -42,33 +38,33 @@ public class GameInfo {
 	};
 	
 	public enum gameCharacter{
-		Baimugui("百目鬼", 55, Career.hooligan, R.drawable.baimugui,0),
-		GaoYu_QiuRen("高羽秋仁", 40, Career.journalist, R.drawable.qiuren, 1),    //高羽秋仁
-		MaJian_LongYi("麻见隆一", 95, Career.hooligan, R.drawable.majian, 2),   //麻见
-		ShiDai("矢代", 15, Career.hooligan, R.drawable.shidai, 3),          //矢代
-		XiaoNiaoYou_Zhang("小鸟游彰", 40, Career.student, R.drawable.xiaoniao, 4),  //小鸟游彰
-		GaoChuan_ZhiYe("缟川直也", 90, Career.student, R.drawable.gaochuan, 5),     //缟川直也
-		ShouYe("守夜", 70, Career.staff, R.drawable.shouye, 6),          //守夜
-		LongCheng("隆成", 50, Career.staff, R.drawable.longcheng, 7),       //隆成
-		Heilai_Lu("黑赖陆", 80, Career.doctor, R.drawable.heilai, 8),        //黑赖陆
-		ChengGu_ZhongChen("城古忠臣", 25, Career.secretary, R.drawable.chenggu, 9),   //城古忠臣
-		YouChuan_YangYi("有川洋一", 60, Career.lawyer, R.drawable.youchuan, 10),     //有川洋一
-		YuQi_ShaoTai("御崎韶太", 30, Career.student, R.drawable.yuqi, 11),        //御崎韶太
-		XiaoYeSi_Lv("小野寺律", 25, Career.editor, R.drawable.xiaoye, 12),     //小野寺律
-		GaoYe_ZongZheng("高野宗政", 80, Career.manager, R.drawable.gaoye, 13), //高野宗政
-		JiuShi_XiaoRen("久世晓人", 80, Career.noble, R.drawable.jiushi, 14),  //久世晓人
-		GuiMu_ZhiZhi("桂木智之", 50, Career.noble, R.drawable.guimu, 15),    //桂木智之
-		QianCun_JiQing("迁村基晴", 60, Career.student, R.drawable.qiancun, 16),  //迁村基晴
-		LianJian_Jing("莲见晶", 40, Career.student, R.drawable.lianjian, 17),   //莲见晶
-		XiTiao_GaoRen("西条高人", 35, Career.star, R.drawable.xitiao, 18),   //西条高人
-		GaoYuan_YiChen("高远一辰", 85, Career.student, R.drawable.gaoyuan, 19),  //高远一辰
-		ZhongSi("柊司", 35, Career.teacher, R.drawable.zhongsi, 20),         //柊司
-		ShenWei("慎尾", 45, Career.bar_owner, R.drawable.shenwei, 21),         //慎尾
-		HeZhi("和智", 80, Career.manager, R.drawable.hezhi, 22),           //和智
-		XiangLe_Ling("向乐玲", 35, Career.staff, R.drawable.xiangle, 23),    //向乐玲
-		ShengHu("圣湖", 75, Career.star, R.drawable.shenghu, 24),         //圣湖
-		YiTiao_LongMa("一条龙马", 75, Career.star, R.drawable.yitiao, 25),   //一条龙马
-		QuanShui("泉水", 30, Career.star, R.drawable.quanshui, 26);         //泉水
+		Baimugui("百目鬼", 55, Career.hooligan, R.drawable.baimugui, 0, 0),
+		GaoYu_QiuRen("高羽秋仁", 40, Career.journalist, R.drawable.qiuren, 0, 1),    //高羽秋仁
+		MaJian_LongYi("麻见隆一", 95, Career.hooligan, R.drawable.majian, 0, 2),   //麻见
+		ShiDai("矢代", 15, Career.hooligan, R.drawable.shidai, 0, 3),          //矢代
+		XiaoNiaoYou_Zhang("小鸟游彰", 40, Career.student, R.drawable.xiaoniao, 0, 4),  //小鸟游彰
+		GaoChuan_ZhiYe("缟川直也", 90, Career.student, R.drawable.gaochuan, 0, 5),     //缟川直也
+		ShouYe("守夜", 70, Career.staff, R.drawable.shouye, 0, 6),          //守夜
+		LongCheng("隆成", 50, Career.staff, R.drawable.longcheng, 0, 7),       //隆成
+		Heilai_Lu("黑赖陆", 80, Career.doctor, R.drawable.heilai, 0, 8),        //黑赖陆
+		ChengGu_ZhongChen("城古忠臣", 25, Career.secretary, R.drawable.chenggu, 0, 9),   //城古忠臣
+		YouChuan_YangYi("有川洋一", 60, Career.lawyer, R.drawable.youchuan, 0, 10),     //有川洋一
+		YuQi_ShaoTai("御崎韶太", 30, Career.student, R.drawable.yuqi, 0, 11),        //御崎韶太
+		XiaoYeSi_Lv("小野寺律", 25, Career.editor, R.drawable.xiaoye, 0, 12),     //小野寺律
+		GaoYe_ZongZheng("高野宗政", 80, Career.manager, R.drawable.gaoye, 0, 13), //高野宗政
+		JiuShi_XiaoRen("久世晓人", 80, Career.noble, R.drawable.jiushi, 0, 14),  //久世晓人
+		GuiMu_ZhiZhi("桂木智之", 50, Career.noble, R.drawable.guimu, 0, 15),    //桂木智之
+		QianCun_JiQing("迁村基晴", 60, Career.student, R.drawable.qiancun, 0, 16),  //迁村基晴
+		LianJian_Jing("莲见晶", 40, Career.student, R.drawable.lianjian, 0, 17),   //莲见晶
+		XiTiao_GaoRen("西条高人", 35, Career.star, R.drawable.xitiao, 0, 18),   //西条高人
+		GaoYuan_YiChen("高远一辰", 85, Career.student, R.drawable.gaoyuan, 0, 19),  //高远一辰
+		ZhongSi("柊司", 35, Career.teacher, R.drawable.zhongsi, 0, 20),         //柊司
+		ShenWei("慎尾", 45, Career.bar_owner, R.drawable.shenwei, 0, 21),         //慎尾
+		HeZhi("和智", 80, Career.manager, R.drawable.hezhi, 0, 22),           //和智
+		XiangLe_Ling("向乐玲", 35, Career.staff, R.drawable.xiangle, 0, 23),    //向乐玲
+		ShengHu("圣湖", 75, Career.star, R.drawable.shenghu, 0, 24),         //圣湖
+		YiTiao_LongMa("一条龙马", 75, Career.star, R.drawable.yitiao, 0, 25),   //一条龙马
+		QuanShui("泉水", 30, Career.star, R.drawable.quanshui, 0, 26);         //泉水
 		//Zhenbi_qi()     //真壁齐
 		//Qingye()    //晴也
 		
@@ -77,12 +73,14 @@ public class GameInfo {
 		private Career career;
 		private int    index;
 		private int    picture;
+		private int    favor;
 		
-		private gameCharacter(String name, int level, Career career, int picture, int index){
+		private gameCharacter(String name, int level, Career career, int picture, int favor, int index){
 			this.name=name;
 			this.level = level;
 			this.career = career;
 			this.picture = picture;
+			this.favor = favor;
 			this.index=index;
 		}
 		
@@ -113,6 +111,14 @@ public class GameInfo {
         
         public void setLevel(int level){
         	this.level = level;
+        }
+        
+        public void setFavor(int favor){
+        	this.favor = favor;
+        }
+        
+        public int getFavor(){
+        	return favor;
         }
         
         public static int getLevel(int index){
@@ -225,92 +231,98 @@ public class GameInfo {
 		single
 	}
 	
+	public enum Favor {
+		
+	}
+	
 	public enum StoryFriend{
-		jouralist_baimugui(Career.journalist, gameCharacter.Baimugui, R.string.jouralist_baimugui, 0),
-		jouralist_gaoyu(Career.journalist, gameCharacter.GaoYu_QiuRen, R.string.journalist_gaoyu, 1 ),
-		journalist_majian(Career.journalist, gameCharacter.MaJian_LongYi, R.string.jouralist_majian, 2),
-		journalist_quanshui(Career.journalist, gameCharacter.QuanShui, R.string.journalist_quanshui, 3),
-		journalist_xitiao(Career.journalist, gameCharacter.XiTiao_GaoRen, R.string.journalist_xitiao, 4),
-		doctor_chenggu(Career.doctor, gameCharacter.ChengGu_ZhongChen, R.string.doctor_chenggu, 5),
-		doctor_heilai(Career.doctor, gameCharacter.Heilai_Lu, R.string.doctor_heilai, 6),
-		doctor_gaochuan(Career.doctor, gameCharacter.GaoChuan_ZhiYe, R.string.doctor_gaochuan, 7),
-		doctor_xiaoniaoyou(Career.doctor, gameCharacter.XiaoNiaoYou_Zhang, R.string.doctor_xiaoniaoyou, 8),
-		doctor_shidai(Career.doctor, gameCharacter.ShiDai, R.string.doctor_shidai, 9),
-		bar_shenwei(Career.bar_owner, gameCharacter.ShenWei, R.string.bar_shenwei, 10),
-		bar_gaochuan(Career.bar_owner, gameCharacter.GaoChuan_ZhiYe, R.string.bar_gaochuan, 11),
-		bar_xitiao(Career.bar_owner, gameCharacter.XiTiao_GaoRen, R.string.bar_xitiao, 12),
-		bar_shouye(Career.bar_owner, gameCharacter.ShouYe, R.string.bar_shouye, 13),
-		bar_hezhi(Career.bar_owner, gameCharacter.HeZhi, R.string.bar_hezhi, 14),
-		editor_gaoye(Career.editor, gameCharacter.GaoYe_ZongZheng, R.string.editor_gaoye, 15),
-		editor_xiaoyesi(Career.editor, gameCharacter.XiaoYeSi_Lv, R.string.editor_xiaoyesi, 16),
-		editor_gaoyu(Career.editor, gameCharacter.GaoYu_QiuRen, R.string.editor_gaoyu, 17),
-		editor_lianjian(Career.editor, gameCharacter.LianJian_Jing, R.string.editor_lianjian, 18),
-		editor_qiancun(Career.editor, gameCharacter.QianCun_JiQing, R.string.editor_qiancun, 19),
-		hooligan_majian(Career.hooligan, gameCharacter.MaJian_LongYi, R.string.hooligan_majian, 20),
-		hooligan_shidai(Career.hooligan, gameCharacter.ShiDai, R.string.hooligan_shidai, 21),
-		hooligan_baimugui(Career.hooligan, gameCharacter.Baimugui, R.string.hooligan_baimugui, 22),
-		hooligan_longcheng(Career.hooligan, gameCharacter.LongCheng, R.string.hooligan_longcheng, 23),
-		hooligan_shenwei(Career.hooligan, gameCharacter.ShenWei, R.string.hooligan_shenwei, 24),
-		lawyer_youchuan(Career.lawyer, gameCharacter.YouChuan_YangYi, R.string.lawyer_youchuan, 25),
-		lawyer_xiaoniaoyou(Career.lawyer, gameCharacter.XiaoNiaoYou_Zhang, R.string.lawyer_xiaoniaoyou, 26),
-		lawyer_baimugui(Career.lawyer, gameCharacter.Baimugui, R.string.lawyer_baimugui, 27),
-		lawyer_longcheng(Career.lawyer, gameCharacter.LongCheng, R.string.lawyer_longcheng, 28),
-		lawyer_hezhi(Career.lawyer, gameCharacter.HeZhi, R.string.lawyer_hezhi, 29),
-		manager_gaoye(Career.manager, gameCharacter.GaoYe_ZongZheng, R.string.manager_gaoye, 30),
-		manager_hezhi(Career.manager, gameCharacter.HeZhi, R.string.manager_hezhi, 31),
-		manager_jiushi(Career.manager, gameCharacter.JiuShi_XiaoRen, R.string.manager_jiushi, 32),
-		manager_guimu(Career.manager, gameCharacter.GuiMu_ZhiZhi, R.string.manager_guimu, 33),
-		manager_xiangle(Career.manager, gameCharacter.XiangLe_Ling, R.string.manager_xiangle, 34),
-		noble_guimu(Career.noble, gameCharacter.GuiMu_ZhiZhi, R.string.noble_guimu, 35),
-		noble_jiushi(Career.noble, gameCharacter.JiuShi_XiaoRen, R.string.noble_jiushi, 36),
-		noble_qiancun(Career.noble, gameCharacter.QianCun_JiQing, R.string.noble_qiancun, 37),
-		noble_majian(Career.noble, gameCharacter.MaJian_LongYi, R.string.noble_majian, 38),
-		noble_shenwei(Career.noble, gameCharacter.ShenWei, R.string.noble_shenwei, 39),
-		police_baimugui(Career.police, gameCharacter.Baimugui, R.string.police_baimugui, 40),
-		police_majian(Career.police, gameCharacter.MaJian_LongYi, R.string.police_majian, 41),
-		police_shidai(Career.police, gameCharacter.ShiDai, R.string.police_shidai, 42),
-		police_longcheng(Career.police, gameCharacter.LongCheng, R.string.police_longcheng, 43),
-		police_shenwei(Career.police, gameCharacter.ShenWei, R.string.police_shenwei, 44),
-		secretary_chenggu(Career.secretary, gameCharacter.ChengGu_ZhongChen, R.string.secretary_chenggu, 45),
-		secretary_hezhi(Career.secretary, gameCharacter.HeZhi, R.string.secretary_hezhi, 46),
-		secretary_gaoye(Career.secretary, gameCharacter.GaoYe_ZongZheng, R.string.secretary_gaoye, 47),
-		secretary_xiangle(Career.secretary, gameCharacter.XiangLe_Ling, R.string.secretary_xiangle, 48),
-		secretary_shouye(Career.secretary, gameCharacter.ShouYe, R.string.secretary_shouye, 49),
-		star_shenghu(Career.star, gameCharacter.ShengHu, R.string.star_shenghu, 50),
-		star_quanshui(Career.star, gameCharacter.QuanShui, R.string.star_quanshui, 51),
-		star_xitiao(Career.star, gameCharacter.XiTiao_GaoRen, R.string.star_xitiao, 52),
-		star_yitiao(Career.star, gameCharacter.YiTiao_LongMa, R.string.star_yitiao, 53),
-		star_gaoyu(Career.star, gameCharacter.GaoYu_QiuRen, R.string.star_gaoyu, 54),
-		student_gaoyuan(Career.student, gameCharacter.GaoYuan_YiChen, R.string.student_gaoyuan, 55),
-		student_yuqi(Career.student, gameCharacter.YuQi_ShaoTai, R.string.student_yuqi, 56),
-		student_gaochuan(Career.student, gameCharacter.GaoChuan_ZhiYe, R.string.student_gaochuan, 57),
-		student_xiaoniaoyou(Career.student, gameCharacter.XiaoNiaoYou_Zhang, R.string.student_xiaoniaoyou, 58),
-		student_zhongsi(Career.student, gameCharacter.ZhongSi, R.string.student_zhongsi, 59),
-		teacher_gaoyuan(Career.teacher, gameCharacter.GaoYuan_YiChen, R.string.teacher_gaoyuan, 60),
-		teacher_yuqi(Career.teacher, gameCharacter.YuQi_ShaoTai, R.string.teacher_yuqi, 61),
-		teacher_lianjian(Career.teacher, gameCharacter.LianJian_Jing, R.string.teacher_lianjian, 62),
-		teacher_youchuan(Career.teacher, gameCharacter.QianCun_JiQing, R.string.teacher_qiancun, 63),
-		teacher_zhongsi(Career.teacher, gameCharacter.ZhongSi, R.string.teacher_zhongsi, 64),
-		staff_heilai(Career.staff, gameCharacter.Heilai_Lu, R.string.staff_heilai, 65),
-		staff_shouye(Career.staff, gameCharacter.ShouYe, R.string.staff_shouye, 66),
-		staff_longcheng(Career.staff, gameCharacter.LongCheng, R.string.staff_longcheng, 67),
-		staff_xiaoyesi(Career.staff, gameCharacter.XiaoYeSi_Lv, R.string.staff_xiaoyesi, 68),
-		staff_zhongsi(Career.staff, gameCharacter.ZhongSi, R.string.staff_zhongsi, 69),
-		writer_xiaoyesi(Career.writer, gameCharacter.XiaoYeSi_Lv, R.string.writer_xiaoyesi, 70),
-		writer_gaoye(Career.writer, gameCharacter.GaoYe_ZongZheng, R.string.writer_gaoye, 71),
-		writer_shenghu(Career.writer, gameCharacter.ShengHu, R.string.writer_shenghu, 72),
-		writer_quanshui(Career.writer, gameCharacter.QuanShui, R.string.writer_quanshui, 73),
-		writer_yitiao(Career.writer, gameCharacter.YiTiao_LongMa, R.string.writer_yitiao, 74);
+		jouralist_baimugui(Career.journalist, gameCharacter.Baimugui, R.string.jouralist_baimugui, 60, 0),
+		jouralist_gaoyu(Career.journalist, gameCharacter.GaoYu_QiuRen, R.string.journalist_gaoyu, 50, 1),
+		journalist_majian(Career.journalist, gameCharacter.MaJian_LongYi, R.string.jouralist_majian, 40, 2),
+		journalist_quanshui(Career.journalist, gameCharacter.QuanShui, R.string.journalist_quanshui, 50, 3),
+		journalist_xitiao(Career.journalist, gameCharacter.XiTiao_GaoRen, R.string.journalist_xitiao, 60, 4),
+		doctor_chenggu(Career.doctor, gameCharacter.ChengGu_ZhongChen, R.string.doctor_chenggu, 40, 5),
+		doctor_heilai(Career.doctor, gameCharacter.Heilai_Lu, R.string.doctor_heilai, 50, 6),
+		doctor_gaochuan(Career.doctor, gameCharacter.GaoChuan_ZhiYe, R.string.doctor_gaochuan, 50, 7),
+		doctor_xiaoniaoyou(Career.doctor, gameCharacter.XiaoNiaoYou_Zhang, R.string.doctor_xiaoniaoyou, 50, 8),
+		doctor_shidai(Career.doctor, gameCharacter.ShiDai, R.string.doctor_shidai, 50, 9),
+		bar_shenwei(Career.bar_owner, gameCharacter.ShenWei, R.string.bar_shenwei, 50, 10),
+		bar_gaochuan(Career.bar_owner, gameCharacter.GaoChuan_ZhiYe, R.string.bar_gaochuan, 50, 11),
+		bar_xitiao(Career.bar_owner, gameCharacter.XiTiao_GaoRen, R.string.bar_xitiao, 50, 12),
+		bar_shouye(Career.bar_owner, gameCharacter.ShouYe, R.string.bar_shouye, 55, 13),
+		bar_hezhi(Career.bar_owner, gameCharacter.HeZhi, R.string.bar_hezhi, 50, 14),
+		editor_gaoye(Career.editor, gameCharacter.GaoYe_ZongZheng, R.string.editor_gaoye, 50, 15),
+		editor_xiaoyesi(Career.editor, gameCharacter.XiaoYeSi_Lv, R.string.editor_xiaoyesi, 60, 16),
+		editor_gaoyu(Career.editor, gameCharacter.GaoYu_QiuRen, R.string.editor_gaoyu, 60, 17),
+		editor_lianjian(Career.editor, gameCharacter.LianJian_Jing, R.string.editor_lianjian, 50, 18),
+		editor_qiancun(Career.editor, gameCharacter.QianCun_JiQing, R.string.editor_qiancun, 50, 19),
+		hooligan_majian(Career.hooligan, gameCharacter.MaJian_LongYi, R.string.hooligan_majian, 50, 20),
+		hooligan_shidai(Career.hooligan, gameCharacter.ShiDai, R.string.hooligan_shidai, 50, 21),
+		hooligan_baimugui(Career.hooligan, gameCharacter.Baimugui, R.string.hooligan_baimugui, 40, 22),
+		hooligan_longcheng(Career.hooligan, gameCharacter.LongCheng, R.string.hooligan_longcheng, 50, 23),
+		hooligan_shenwei(Career.hooligan, gameCharacter.ShenWei, R.string.hooligan_shenwei, 50, 24),
+		lawyer_youchuan(Career.lawyer, gameCharacter.YouChuan_YangYi, R.string.lawyer_youchuan, 50, 25),
+		lawyer_xiaoniaoyou(Career.lawyer, gameCharacter.XiaoNiaoYou_Zhang, R.string.lawyer_xiaoniaoyou, 50, 26),
+		lawyer_baimugui(Career.lawyer, gameCharacter.Baimugui, R.string.lawyer_baimugui, 55, 27),
+		lawyer_longcheng(Career.lawyer, gameCharacter.LongCheng, R.string.lawyer_longcheng, 50, 28),
+		lawyer_hezhi(Career.lawyer, gameCharacter.HeZhi, R.string.lawyer_hezhi, 50, 29),
+		manager_gaoye(Career.manager, gameCharacter.GaoYe_ZongZheng, R.string.manager_gaoye, 50, 30),
+		manager_hezhi(Career.manager, gameCharacter.HeZhi, R.string.manager_hezhi, 50, 31),
+		manager_jiushi(Career.manager, gameCharacter.JiuShi_XiaoRen, R.string.manager_jiushi, 50, 32),
+		manager_guimu(Career.manager, gameCharacter.GuiMu_ZhiZhi, R.string.manager_guimu, 50, 33),
+		manager_xiangle(Career.manager, gameCharacter.XiangLe_Ling, R.string.manager_xiangle, 55, 34),
+		noble_guimu(Career.noble, gameCharacter.GuiMu_ZhiZhi, R.string.noble_guimu, 45, 35),
+		noble_jiushi(Career.noble, gameCharacter.JiuShi_XiaoRen, R.string.noble_jiushi, 50, 36),
+		noble_qiancun(Career.noble, gameCharacter.QianCun_JiQing, R.string.noble_qiancun, 50, 37),
+		noble_majian(Career.noble, gameCharacter.MaJian_LongYi, R.string.noble_majian, 50, 38),
+		noble_shenwei(Career.noble, gameCharacter.ShenWei, R.string.noble_shenwei, 60, 39),
+		police_baimugui(Career.police, gameCharacter.Baimugui, R.string.police_baimugui, 40, 40),
+		police_majian(Career.police, gameCharacter.MaJian_LongYi, R.string.police_majian, 40, 41),
+		police_shidai(Career.police, gameCharacter.ShiDai, R.string.police_shidai, 40, 42),
+		police_longcheng(Career.police, gameCharacter.LongCheng, R.string.police_longcheng, 40, 43),
+		police_shenwei(Career.police, gameCharacter.ShenWei, R.string.police_shenwei, 50, 44),
+		secretary_chenggu(Career.secretary, gameCharacter.ChengGu_ZhongChen, R.string.secretary_chenggu, 50, 45),
+		secretary_hezhi(Career.secretary, gameCharacter.HeZhi, R.string.secretary_hezhi, 55, 46),
+		secretary_gaoye(Career.secretary, gameCharacter.GaoYe_ZongZheng, R.string.secretary_gaoye, 55, 47),
+		secretary_xiangle(Career.secretary, gameCharacter.XiangLe_Ling, R.string.secretary_xiangle, 50, 48),
+		secretary_shouye(Career.secretary, gameCharacter.ShouYe, R.string.secretary_shouye, 50, 49),
+		star_shenghu(Career.star, gameCharacter.ShengHu, R.string.star_shenghu, 50, 50),
+		star_quanshui(Career.star, gameCharacter.QuanShui, R.string.star_quanshui, 50, 51),
+		star_xitiao(Career.star, gameCharacter.XiTiao_GaoRen, R.string.star_xitiao, 45, 52),
+		star_yitiao(Career.star, gameCharacter.YiTiao_LongMa, R.string.star_yitiao, 40, 53),
+		star_gaoyu(Career.star, gameCharacter.GaoYu_QiuRen, R.string.star_gaoyu, 50, 54),
+		student_gaoyuan(Career.student, gameCharacter.GaoYuan_YiChen, R.string.student_gaoyuan, 50, 55),
+		student_yuqi(Career.student, gameCharacter.YuQi_ShaoTai, R.string.student_yuqi, 50, 56),
+		student_gaochuan(Career.student, gameCharacter.GaoChuan_ZhiYe, R.string.student_gaochuan, 50, 57),
+		student_xiaoniaoyou(Career.student, gameCharacter.XiaoNiaoYou_Zhang, R.string.student_xiaoniaoyou, 50, 58),
+		student_zhongsi(Career.student, gameCharacter.ZhongSi, R.string.student_zhongsi, 55, 59),
+		teacher_gaoyuan(Career.teacher, gameCharacter.GaoYuan_YiChen, R.string.teacher_gaoyuan, 50, 60),
+		teacher_yuqi(Career.teacher, gameCharacter.YuQi_ShaoTai, R.string.teacher_yuqi, 50, 61),
+		teacher_lianjian(Career.teacher, gameCharacter.LianJian_Jing, R.string.teacher_lianjian, 50, 62),
+		teacher_youchuan(Career.teacher, gameCharacter.QianCun_JiQing, R.string.teacher_qiancun, 50, 63),
+		teacher_zhongsi(Career.teacher, gameCharacter.ZhongSi, R.string.teacher_zhongsi, 50, 64),
+		staff_heilai(Career.staff, gameCharacter.Heilai_Lu, R.string.staff_heilai, 50, 65),
+		staff_shouye(Career.staff, gameCharacter.ShouYe, R.string.staff_shouye, 50, 66),
+		staff_longcheng(Career.staff, gameCharacter.LongCheng, R.string.staff_longcheng, 50, 67),
+		staff_xiaoyesi(Career.staff, gameCharacter.XiaoYeSi_Lv, R.string.staff_xiaoyesi, 50, 68),
+		staff_zhongsi(Career.staff, gameCharacter.ZhongSi, R.string.staff_zhongsi, 50, 69),
+		writer_xiaoyesi(Career.writer, gameCharacter.XiaoYeSi_Lv, R.string.writer_xiaoyesi, 60, 70),
+		writer_gaoye(Career.writer, gameCharacter.GaoYe_ZongZheng, R.string.writer_gaoye, 50, 71),
+		writer_shenghu(Career.writer, gameCharacter.ShengHu, R.string.writer_shenghu, 55, 72),
+		writer_quanshui(Career.writer, gameCharacter.QuanShui, R.string.writer_quanshui, 55, 73),
+		writer_yitiao(Career.writer, gameCharacter.YiTiao_LongMa, R.string.writer_yitiao, 60, 74);
 		
 		private Career career;
 		private gameCharacter character;
 		private int story;
 		private int index;
+		private int favorLevel;
 		private StoryFriend(Career career, gameCharacter character,
-				int story, int index){
+				int story, int favorLevel, int index){
 			this.career = career;
 			this.character = character;
 			this.story = story;
+			this.favorLevel = favorLevel;
 			this.index = index;
 		}
 		
@@ -332,6 +344,72 @@ public class GameInfo {
 		private gameCharacter getCharacter(){
 			return character;
 		}
+		
+		public static int getFavorLevel(Career career, gameCharacter character){
+			for (StoryFriend i: StoryFriend.values()){
+				if(i.getCharacter() == character){
+					if(i.getCareer() == career){
+						return i.favorLevel;
+					}
+				}
+			}
+			return -1;
+		}
+	}
+	
+	public enum LuckyDraw {
+		visiting_to(2, 2, R.string.visiting_to, 0),   //GLevel, FavorLevel, event, index
+		be_visited(-2, 2, R.string.be_visited, 1),
+		working_with(2, 2, R.string.working_with, 2),
+		be_worked(-2, 2, R.string.be_worked, 3),
+		clean_house(2, 2, R.string.clean_house, 4),
+		clean_house2(-2, 2, R.string.clean_house2, 5),
+		telling_to(2, 2, R.string.telling_to, 6),
+		be_told(-2, 2, R.string.be_told, 7),
+		call_to(2, 2, R.string.call_to, 8),
+		be_called(-2, 2, R.string.be_called, 9),
+		present_to(2, 2, R.string.present_to, 10),
+		get_present(-2, 2, R.string.get_present, 11),
+		invite_to(2, 2, R.string.invite_to,12),
+		be_invited(-2, 2, R.string.be_invited, 13);
+		
+		private int gLevel;
+		private int favorLevel;
+		private int event;
+		private int index;
+		
+		private LuckyDraw(int gLevel, int favorLevel, int event, int index){
+			this.gLevel = gLevel;
+			this.favorLevel = favorLevel;
+			this.event = event;
+			this.index = index;
+		}
+		
+		public static int getFavorLevel(int index){
+			for(LuckyDraw c: LuckyDraw.values()){
+				if(c.index == index){
+					return c.favorLevel;
+				}
+			}
+			return -1;
+		}
+		public static int getGLevel(int index){
+			for(LuckyDraw c: LuckyDraw.values()){
+				if(c.index == index){
+					return c.gLevel;
+				}
+			}
+			return -1;
+		}
+		public static int getEvent(int index){
+			for(LuckyDraw c: LuckyDraw.values()){
+				if(c.index == index){
+					return c.event;
+				}
+			}
+			return -1;
+		}
+
 	}
 	
     String playerName;
@@ -352,6 +430,7 @@ public class GameInfo {
 	
 	private void InitMakeFriends() {
 		careerhash = new Hashtable<Career, gameCharacter[]>();
+		
 		gameCharacter name[][] = new gameCharacter[Career.values().length][KNOWN_MAX];
 		int [] i = getRandomIndex(KNOWN_MAX);
 		name[0][i[0]] =  gameCharacter.Baimugui;     //interview the killer for his father
@@ -387,7 +466,7 @@ public class GameInfo {
 		name[5][i[0]] = gameCharacter.YouChuan_YangYi;    //know another lawyer
 		name[5][i[1]] = gameCharacter.XiaoNiaoYou_Zhang;  //know another lawyer
 		name[5][i[2]] = gameCharacter.Baimugui;           //help him defend in the court
-		name[5][i[3]] = gameCharacter.MaJian_LongYi;      //help him to resolve the case   
+		name[5][i[3]] = gameCharacter.LongCheng;      //help him to resolve the case   
 		name[5][i[4]] = gameCharacter.HeZhi;              //help him to resolve the case
 		careerhash.put(Career.lawyer, name[5]);
 		name[6][i[0]] = gameCharacter.GaoYe_ZongZheng;    //know another manager
@@ -577,8 +656,13 @@ public class GameInfo {
 			if(found) continue;
 			else break;
 		}
-		knownList.add(nameList[nameIndex]);
-		return nameList[nameIndex];
+		if(nameIndex < KNOWN_MAX){
+		  knownList.add(nameList[nameIndex]);
+		 // nameList[nameIndex].setFavor(StoryFriend.getFavorLevel(null, nameList[nameIndex].getName()));
+		  return nameList[nameIndex];
+		} else {
+		  return null;
+		}
 	}
 	
 	public ArrayList<gameCharacter> getKnownList(){
@@ -587,11 +671,19 @@ public class GameInfo {
 	
 	public void changeCareer(){
 		rand = new Random();
-		Career newCareer;
 		int careerIndex;
 		do {
 		  careerIndex = rand.nextInt(Career.waiter.getIndex()+1); //TODO here is a hack. Need use a general way
 		} while (Career.getCareer(careerIndex) == getPlayerCareer());
 		setPlayerCareer(Career.getCareer(careerIndex));
+	}
+
+	public gameCharacter getAKnownGuy() {
+		if(knownList.size() == 0) {
+			return null;
+		} else {
+		    rand = new Random();
+		    return knownList.get(rand.nextInt(knownList.size()));
+		}
 	}
 }

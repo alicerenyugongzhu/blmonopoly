@@ -134,4 +134,27 @@
     <!-- Move Back -->
     <string name="move_back1">You hit move back. You move back</string>
     <string name="move_back_title">Move Back</string>
+    
+    <!-- Date -->
+    <string name="date1">You are dating with </string>
+    <string name="date2">. The favor level of him is increased </string>
+    <string name="date3">. Now the total favor level to him is </string>
+    <string name="date_title">Date</string>
+    
+    <!-- Lucky Draw -->
+    <string name="visiting_to">You are visiting</string>
+    <string name="be_visited">is visiting you</string>
+    <string name="working_with">You are working with </string>
+    <string name="be_worked"> is working with you</string>
+    <string name="clean_house">You are helping to clean house</string>
+    <string name="clean_house2">is helping you cleaning house</string>
+    <string name="telling_to">You are telling your related to  </string>
+    <string name="be_told">is told you his things</string>
+    <string name="call_to">You are calling to </string>
+    <string name="be_called">is calling you now</string>
+    <string name="present_to">You are giving present to</string>
+    <string name="get_present">You get present from </string>
+    <string name="invite_to">You can inviting </string>
+    <string name="be_invited">is inviting you to his birthday party</string>
+    <string name="luckyDraw_title">Lucky Draw</string>
 </resources>
