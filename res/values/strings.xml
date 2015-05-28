@@ -157,4 +157,16 @@
     <string name="invite_to">You can inviting </string>
     <string name="be_invited">is inviting you to his birthday party</string>
     <string name="luckyDraw_title">Lucky Draw</string>
+    
+    <!-- Task -->
+    <string name="task_describe">Question is: </string>
+    <string name="task_title">Task</string>
+    <string name="task1">In explorer, who is take Qiuren to HongKong?</string>
+    <string name="task1_c1">Fei Long</string>
+    <string name="task1_c2">Ma Jian</string>
+    <string name="task2">In Bird not Fly, who is killed by Baimugui</string>
+    <string name="task2_c1">His father</string>
+    <string name="task2_c2">His sister</string>
+    
+        
 </resources>

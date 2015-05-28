@@ -326,6 +326,7 @@ public class GameInfo {
 			this.index = index;
 		}
 		
+
 		public static int getStoryFriend(Career career, gameCharacter character){
 			for (StoryFriend i: StoryFriend.values()){
 				if(i.getCharacter() == character){
@@ -410,6 +411,49 @@ public class GameInfo {
 			return -1;
 		}
 
+	}
+	
+	public enum Task {
+		task1(R.string.task1, R.string.task1_c1, R.string.task1_c2, 0, 0),
+		task2(R.string.task2, R.string.task2_c1, R.string.task2_c2, 0, 1);
+		private int task_question;
+		private int task_choice_1;
+		private int task_choice_2;
+		private int result;
+		private int index;
+		
+		private Task(int task_question, int task_c1, int task_c2, int result, int index){
+			this.task_question = task_question;
+			this.task_choice_1 = task_c1;
+			this.task_choice_2 = task_c2;
+			this.result = result;
+			this.index = index;
+		}
+		
+		public int getResult(){
+			return result;
+		}
+		
+		public int getQuestion(){
+			return task_question; 
+		}
+		
+		public int getR1(){
+			return task_choice_1;
+		}
+		
+		public int getR2(){
+			return task_choice_2;
+		}
+		
+		public static Task getTask(int index){
+			for(Task c: Task.values()){
+				if(c.index == index){
+					return c;
+				}
+			}
+			return null;
+		}
 	}
 	
     String playerName;

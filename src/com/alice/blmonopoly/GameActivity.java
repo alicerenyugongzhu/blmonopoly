@@ -6,6 +6,7 @@ import com.alice.blmonopoly.util.GameInfo;
 import com.alice.blmonopoly.util.GameInfo.Career;
 import com.alice.blmonopoly.util.GameInfo.LuckyDraw;
 import com.alice.blmonopoly.util.GameInfo.StoryFriend;
+import com.alice.blmonopoly.util.GameInfo.Task;
 import com.alice.blmonopoly.util.GameInfo.gameCharacter;
 import com.alice.blmonopoly.util.GameInfo.gameEvent;
 import com.alice.blmonopoly.util.MapCell;
@@ -35,6 +36,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -227,7 +231,7 @@ public class GameActivity extends Activity{
 		private void InitPicScale() {
 			Matrix matrix = new Matrix();
 			matrix.reset();
-			player = ((BitmapDrawable)getResources().getDrawable(R.drawable.qmove)).getBitmap();
+			player = ((BitmapDrawable)getResources().getDrawable(R.drawable.move)).getBitmap();
 			float scaleX = (float)cubeWidth/(float)(player.getWidth());
 			float scaleY = (float)cubeHeight/(float)player.getHeight();
 
@@ -617,12 +621,71 @@ public class GameActivity extends Activity{
 		for(i = 0; i<gameInfo.getTaskNumber() && find != true; i++){
 			if(playerX/cubeWidth == mapCell[j].getX() && playerY/cubeHeight == mapCell[j].getY()){
 				find = true;
-				ShowMsg("Hit Task");
+				//ShowMsg("Hit Task");
+				random = new Random();
+				int taskNum = random.nextInt(Task.values().length);
+				popTask(Task.getTask(taskNum));
 			}
 			j++;	
 		}
 	}
+	RadioButton taskResult1;
+	RadioButton taskResult2;
+	boolean taskResult = false;
+	private void popTask(final Task task){
+		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
+		final View textEntryView = factory.inflate(R.layout.task, null);
+		TextView question = (TextView)textEntryView.findViewById(R.id.task_description);
+		question.setText(task.getQuestion());
+		RadioGroup rg = (RadioGroup)textEntryView.findViewById(R.id.taskDetail);
+		taskResult1 = (RadioButton)textEntryView.findViewById(R.id.taskResult1);
+		taskResult1.setText(task.getR1());
+		taskResult2 = (RadioButton)textEntryView.findViewById(R.id.taskResult2);
+		taskResult2.setText(task.getR2());
+		rg.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
+			@Override
+			public void onCheckedChanged(RadioGroup arg0, int arg1) {
+				switch (task.getResult()){
+				  case 0:
+				    if(arg1 == taskResult1.getId()){
+				    	taskResult = true;
+				    } else {
+				    	taskResult = false;
+				    }
+				    break;
+				case 1:
+				    if(arg1 == taskResult1.getId()){
+				    	taskResult = false;
+				    } else {
+				    	taskResult = true;
+				    }
+				    break;
+				}
+			}
+			
+		});
+		
+		AlertDialog dlg = new AlertDialog.Builder(GameActivity.this)
+		.setTitle(R.string.task_title)
+		.setView(textEntryView)
+		.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				arg0.cancel();
+				if(taskResult){
+				    popReward();
+				}
+				ShowMsg("arg1 is " + arg1);
+			}
+		})
+		.create();
+		dlg.show();
+	}
+	
+	private void popReward(){
+		
+	}
 
 	private void popLuckyDraw(String event, int G, gameCharacter luckyGuy) {
 		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
@@ -692,8 +755,11 @@ public class GameActivity extends Activity{
 		int popHeight = 200;
 
 		movepop = new PopupWindow(textEntryView, popWidth, popHeight, true);
-
-		movepop.setBackgroundDrawable(getResources().getDrawable(R.drawable.qmove));
+        if(back){
+		    movepop.setBackgroundDrawable(getResources().getDrawable(R.drawable.move_back));
+        } else {
+        	movepop.setBackgroundDrawable(getResources().getDrawable(R.drawable.move_forward));
+        }
 		movepop.setFocusable(true);
 		movepop.setOutsideTouchable(false);
 		movepop.setTouchable(true);
