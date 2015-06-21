@@ -739,8 +739,6 @@ public class GameActivity extends Activity{
 						@Override
 						public void onClick(View arg0) {
 							LinearLayout parent = (LinearLayout)arg0.getParent();
-							Log.d("alice","id is " + arg0.getId());
-							Log.d("alice","id is " + parent.getId());
 							TextView number = (TextView)parent.findViewById(R.id.reward_number);
 							int value;
 							if(arg0.getContentDescription().equals("increase")){
@@ -806,6 +804,7 @@ public class GameActivity extends Activity{
 					}
 				} else {
 					ShowMsg(getString(R.string.reward_mismatch) + (total-dispatch));
+					dispatch = 0;
 				}
 			}
 		});
