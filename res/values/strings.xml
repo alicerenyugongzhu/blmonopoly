@@ -168,5 +168,12 @@
     <string name="task2_c1">His father</string>
     <string name="task2_c2">His sister</string>
     
+    <!-- Reward -->
+    <string name="reward">Reward</string>
+    <string name="reward1">Your answer is correct. You got </string>
+    <string name="reward2">to balance your favor level to whom you have already known.</string>
+    <string name="increase">increase</string>
+    <string name="decrease">decrease</string>
+    <string name="reward_mismatch">You dispatch score is not equal to the total allowrance. Please update it.</string>
         
 </resources>

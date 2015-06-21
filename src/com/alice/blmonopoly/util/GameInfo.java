@@ -121,6 +121,14 @@ public class GameInfo {
         	return favor;
         }
         
+        public static int getFavor(int picture){
+            for (gameCharacter c : gameCharacter.values()) {
+                if (c.getPicture() == picture) {
+                    return c.favor;
+                }
+            }
+            return -1;
+        }
         public static int getLevel(int index){
             for (gameCharacter c : gameCharacter.values()) {
                 if (c.getIndex() == index) {
@@ -356,6 +364,7 @@ public class GameInfo {
 			}
 			return -1;
 		}
+
 	}
 	
 	public enum LuckyDraw {
@@ -686,8 +695,8 @@ public class GameInfo {
 		//}
 		int nameIndex = 0;
 		for(; nameIndex < KNOWN_MAX; nameIndex++){
-			Log.d("alice", "nameList name is " + nameList[nameIndex].getName());
-			Log.d("alice", "player name is " + getPlayerName());
+			//Log.d("alice", "nameList name is " + nameList[nameIndex].getName());
+			//Log.d("alice", "player name is " + getPlayerName());
 			if(nameList[nameIndex].getName() == getPlayerName()){
 				continue;
 			}

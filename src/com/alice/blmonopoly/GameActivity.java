@@ -1,5 +1,10 @@
 package com.alice.blmonopoly;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.alice.blmonopoly.util.GameInfo;
@@ -31,14 +36,21 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -673,18 +685,131 @@ public class GameActivity extends Activity{
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
 				arg0.cancel();
-				if(taskResult){
+				if(taskResult && (gameInfo.getKnownList().size()>0)){
 				    popReward();
+				} else if(!taskResult){
+					ShowMsg("Your answer is wrong");
 				}
-				ShowMsg("arg1 is " + arg1);
 			}
 		})
 		.create();
 		dlg.show();
 	}
 	
+	int total = 0;
+	int dispatch = 0;
+	int[][] favorNum;
 	private void popReward(){
+		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
+		final View textEntryView = factory.inflate(R.layout.reward, null);
 		
+		TextView text = (TextView)textEntryView.findViewById(R.id.reward_text);
+		
+		random = new Random();
+		total = random.nextInt(5) + 2;
+		text.setText(getString(R.string.reward1) + " " + total + " " + getString(R.string.reward2));
+		
+		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
+		final ArrayList<gameCharacter> known = gameInfo.getKnownList();
+		favorNum = new int[known.size()][2];
+		for(int i = 0; i < known.size(); i++){
+			favorNum[i][0] = -1;
+		}
+		Log.d("alice", "known size is " + known.size());
+		for(int i = 0; i < known.size(); i++){
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("photo", known.get(i).getPicture());
+			item.put("increase", 0);
+			item.put("number", known.get(i).getFavor());
+			item.put("degrade", 0);
+			listItems.add(item);
+		}
+		
+		SimpleAdapter sa = new SimpleAdapter(this, listItems, R.layout.list_known, 
+				new String[]{"photo", "increase", "number", "degrade"}, 
+				new int[]{R.id.reward_photo, R.id.reward_increase, R.id.reward_number, R.id.reward_decrease});
+		SimpleAdapter.ViewBinder binder = new SimpleAdapter.ViewBinder(){
+
+			@Override
+			public boolean setViewValue(View view, Object arg1, String arg2) {
+				if (view instanceof ImageButton) {
+					final View button = view;
+					button.setOnClickListener(new OnClickListener(){
+						
+						@Override
+						public void onClick(View arg0) {
+							LinearLayout parent = (LinearLayout)arg0.getParent();
+							Log.d("alice","id is " + arg0.getId());
+							Log.d("alice","id is " + parent.getId());
+							TextView number = (TextView)parent.findViewById(R.id.reward_number);
+							int value;
+							if(arg0.getContentDescription().equals("increase")){
+								value = Integer.parseInt((String) number.getText()) + 1;
+								dispatch = dispatch + 1;
+								number.setText(Integer.toString(value));
+								
+							} else {
+								value = Integer.parseInt((String) number.getText());
+								if(value > 0){
+									value = value - 1;
+									dispatch = dispatch - 1;
+								}
+								number.setText(Integer.toString(value));
+							}
+							boolean findIt = false;
+							int i = 0;
+							for(; i < known.size() && favorNum[i][0] != -1; i++){
+								if(favorNum[i][0] == number.getId()){
+									favorNum[i][1] = value;
+									findIt = true;
+								}
+							}
+							if(!findIt){
+								favorNum[i][0] = number.getId();
+								favorNum[i][1] = value;
+							}
+							//TODO change the favor here directly
+						}
+						
+					});
+				}
+				return false;
+			}
+			
+		};
+		sa.setViewBinder(binder);
+		final ListView list = (ListView)textEntryView.findViewById(R.id.reward_list);
+		list.setAdapter(sa);
+		
+		final AlertDialog dlg = new AlertDialog.Builder(GameActivity.this)
+		.setTitle(R.string.reward)
+		.setView(textEntryView)
+		.setPositiveButton(R.string.confirm, null).create();
+		dlg.show();
+
+		dlg.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				
+				if(total == dispatch){
+					dlg.dismiss();
+					for(int i = 0; i < list.getCount(); i++){
+						  LinearLayout layout = (LinearLayout) list.getAdapter().getView(i, null, null);
+						  TextView textView = (TextView)layout.findViewById(R.id.reward_number);
+						  Log.d("alice", "the textView is " + textView.getText());
+						  for(int j = 0; j< known.size(); j++)
+						  if(favorNum[j][0] == textView.getId()){
+						    known.get(i).setFavor(favorNum[j][1]);
+						    Log.d("alice", "the faver value is " + favorNum[j][1]);
+						  }
+					}
+				} else {
+					ShowMsg(getString(R.string.reward_mismatch) + (total-dispatch));
+				}
+			}
+		});
+
 	}
 
 	private void popLuckyDraw(String event, int G, gameCharacter luckyGuy) {
