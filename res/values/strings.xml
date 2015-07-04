@@ -175,5 +175,8 @@
     <string name="increase">increase</string>
     <string name="decrease">decrease</string>
     <string name="reward_mismatch">You dispatch score is not equal to the total allowrance. Please update it.</string>
+    
+    <!-- End -->
+    <string name="signle">You are still single. Try another time!</string>
         
 </resources>

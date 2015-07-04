@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -471,8 +472,23 @@ public class GameActivity extends Activity{
 	}
 	
 	private void GameEnd() {
-		// TODO Auto-generated method stub
-		
+		//TODO name, photo, endEvent, gong
+		GameInfo.endEvent endResult;
+		endResult = gameInfo.getEnd();
+		ArrayList<gameCharacter> list = null;
+		if((endResult == GameInfo.endEvent.boyfriend) || (endResult == GameInfo.endEvent.nodecision)){
+			list = gameInfo.getBfList();
+		} else if((endResult == GameInfo.endEvent.harem) || (endResult == GameInfo.endEvent.married)){
+			list = gameInfo.getMarryList();
+		}
+		Intent intent = new Intent(GameActivity.this, GameEndActivity.class);
+		intent.putExtra("END_RESULT", endResult);
+		intent.putExtra("PLAYER_PHOTO", gameInfo.getPlayerPhoto());
+		intent.putExtra("RELATED_LIST", list);
+		intent.putExtra("PLAYER_NAME", gameInfo.getPlayerName());
+		//intent.putExtra("RELATED_NAME", related_name);
+		intent.putExtra("GONG", gameInfo.getPlayerGValue());
+	    startActivity(intent);	
 	}
 	
 	private boolean updatePosition(int step, boolean back) {
@@ -698,7 +714,6 @@ public class GameActivity extends Activity{
 	
 	int total = 0;
 	int dispatch = 0;
-	int[][] favorNum;
 	private void popReward(){
 		LayoutInflater factory = LayoutInflater.from(GameActivity.this);
 		final View textEntryView = factory.inflate(R.layout.reward, null);
@@ -711,10 +726,6 @@ public class GameActivity extends Activity{
 		
 		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
 		final ArrayList<gameCharacter> known = gameInfo.getKnownList();
-		favorNum = new int[known.size()][2];
-		for(int i = 0; i < known.size(); i++){
-			favorNum[i][0] = -1;
-		}
 		Log.d("alice", "known size is " + known.size());
 		for(int i = 0; i < known.size(); i++){
 			Map<String, Object> item = new HashMap<String, Object>();
@@ -722,12 +733,13 @@ public class GameActivity extends Activity{
 			item.put("increase", 0);
 			item.put("number", known.get(i).getFavor());
 			item.put("degrade", 0);
+			item.put("seq", i);
 			listItems.add(item);
 		}
 		
 		SimpleAdapter sa = new SimpleAdapter(this, listItems, R.layout.list_known, 
-				new String[]{"photo", "increase", "number", "degrade"}, 
-				new int[]{R.id.reward_photo, R.id.reward_increase, R.id.reward_number, R.id.reward_decrease});
+				new String[]{"photo", "increase", "number", "degrade", "seq"}, 
+				new int[]{R.id.reward_photo, R.id.reward_increase, R.id.reward_number, R.id.reward_decrease, R.id.reward_seq});
 		SimpleAdapter.ViewBinder binder = new SimpleAdapter.ViewBinder(){
 
 			@Override
@@ -740,12 +752,12 @@ public class GameActivity extends Activity{
 						public void onClick(View arg0) {
 							LinearLayout parent = (LinearLayout)arg0.getParent();
 							TextView number = (TextView)parent.findViewById(R.id.reward_number);
+							TextView seq = (TextView)parent.findViewById(R.id.reward_seq);
 							int value;
 							if(arg0.getContentDescription().equals("increase")){
 								value = Integer.parseInt((String) number.getText()) + 1;
 								dispatch = dispatch + 1;
 								number.setText(Integer.toString(value));
-								
 							} else {
 								value = Integer.parseInt((String) number.getText());
 								if(value > 0){
@@ -754,19 +766,9 @@ public class GameActivity extends Activity{
 								}
 								number.setText(Integer.toString(value));
 							}
-							boolean findIt = false;
-							int i = 0;
-							for(; i < known.size() && favorNum[i][0] != -1; i++){
-								if(favorNum[i][0] == number.getId()){
-									favorNum[i][1] = value;
-									findIt = true;
-								}
-							}
-							if(!findIt){
-								favorNum[i][0] = number.getId();
-								favorNum[i][1] = value;
-							}
-							//TODO change the favor here directly
+							String seqNum = seq.getText().toString();
+							Log.d("alice", "the seqNum is " + seqNum);
+							known.get(Integer.parseInt(seqNum)).setFavor(value);
 						}
 						
 					});
@@ -792,19 +794,9 @@ public class GameActivity extends Activity{
 				
 				if(total == dispatch){
 					dlg.dismiss();
-					for(int i = 0; i < list.getCount(); i++){
-						  LinearLayout layout = (LinearLayout) list.getAdapter().getView(i, null, null);
-						  TextView textView = (TextView)layout.findViewById(R.id.reward_number);
-						  Log.d("alice", "the textView is " + textView.getText());
-						  for(int j = 0; j< known.size(); j++)
-						  if(favorNum[j][0] == textView.getId()){
-						    known.get(i).setFavor(favorNum[j][1]);
-						    Log.d("alice", "the faver value is " + favorNum[j][1]);
-						  }
-					}
+					dispatch = 0;
 				} else {
 					ShowMsg(getString(R.string.reward_mismatch) + (total-dispatch));
-					dispatch = 0;
 				}
 			}
 		});

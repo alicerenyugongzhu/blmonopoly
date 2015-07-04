@@ -5,11 +5,16 @@ import java.util.Hashtable;
 import java.util.Random;
 import android.util.Log;
 import com.alice.blmonopoly.R;
+import com.alice.blmonopoly.util.GameInfo.endEvent;
 
 //Think about whether I need to use the Abstract Class
 public class GameInfo {
 	//Static value
 	int KNOWN_MAX=5;
+	
+	//End standard
+	final int MARRY = 90;
+	final int BF    = 80;
 	
 	//Random
 	Random rand;
@@ -232,15 +237,19 @@ public class GameInfo {
 	}
 	
 	public enum endEvent{
-		married,
-		cohabit,
-		boyfriends,
-		harem,
-		single
-	}
-	
-	public enum Favor {
+		married(R.drawable.cetif_marry, 0),   //Only one over 90
+		harem(R.drawable.cetif_haram, 1),     //more than one over 90
+		boyfriend(R.drawable.cetif_bf, 2), //Only one over 80
+		nodecision(R.drawable.cetif_nodecision, 3), //More than one over 80
+		single(R.drawable.cetif_single, 4) ;     //no one over 80
 		
+		private int event;
+		private int index;
+		
+		private endEvent(int event, int index){
+			this.event = event;
+			this.index = index;
+		}
 	}
 	
 	public enum StoryFriend{
@@ -739,4 +748,49 @@ public class GameInfo {
 		    return knownList.get(rand.nextInt(knownList.size()));
 		}
 	}
+	
+	ArrayList<gameCharacter> marryList = null;
+	ArrayList<gameCharacter> bfList = null;
+	
+	public endEvent getEnd() {
+		marryList = new ArrayList<gameCharacter>();
+		bfList = new ArrayList<gameCharacter>();
+		if(knownList.size() == 0){  //Known no one
+			return endEvent.single;
+		} else {
+			int marryCount = 0;
+			int bfCount = 0;
+
+			for(int i = 0; i<knownList.size(); i++){
+				int favor = knownList.get(i).getFavor();
+				if( favor > MARRY){
+					marryCount++;
+					marryList.add(knownList.get(i));
+				} else if (favor > BF) {
+					bfCount++;
+					bfList.add(knownList.get(i));  //TODO failed here
+				}
+			}
+		    if(marryCount > 1){
+		    	return endEvent.harem;
+		    } else if (marryCount == 1){
+		    	return endEvent.married;
+		    } else if(bfCount > 1){
+		    	return endEvent.nodecision;
+		    } else if(bfCount == 1){
+		    	return endEvent.boyfriend;
+		    } else {
+		    	return endEvent.single;
+		    }
+		}
+	}
+	
+	public ArrayList<gameCharacter> getMarryList(){
+		return marryList;
+	}
+	
+	public ArrayList<gameCharacter> getBfList(){
+		return bfList;
+	}
 }
+
